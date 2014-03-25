@@ -177,6 +177,33 @@ bool RViz::eventFilter(QObject* watched, QEvent* event)
   return QObject::eventFilter(watched, event);
 }
 
+void RViz::saveSettings(qt_gui_cpp::Settings& plugin_settings, qt_gui_cpp::Settings& instance_settings) const
+{
+  instance_settings.setValue("hide_menu", hide_menu_);
+
+  if (!display_config_.isNull())
+  {
+	instance_settings.setValue("display_config", display_config_);
+  }
+}
+
+void RViz::restoreSettings(const qt_gui_cpp::Settings& plugin_settings, const qt_gui_cpp::Settings& instance_settings)
+{
+  QVariant hide_menu = instance_settings.value("hide_menu");
+  if (hide_menu.canConvert<bool>())
+  {
+    hide_menu_ = hide_menu.toBool();
+    widget_->menuBar()->setVisible(!hide_menu_);
+  }
+
+  QVariant display_config = instance_settings.value("display_config");
+  if (display_config.canConvert<QString>())
+  {
+    display_config_ = display_config.toString();
+    widget_->loadDisplayConfig(display_config_);
+  }
+}
+
 }
 
 PLUGINLIB_EXPORT_CLASS(rqt_rviz::RViz, rqt_gui_cpp::Plugin)
