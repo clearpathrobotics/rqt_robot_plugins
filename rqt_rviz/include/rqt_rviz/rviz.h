@@ -67,7 +67,7 @@ protected:
   Ogre::Log* log_;
 
   bool hide_menu_;
-  std::string display_config_;
+  QString display_config_;
 };
 
 }
