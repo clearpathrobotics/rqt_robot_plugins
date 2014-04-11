@@ -70,7 +70,6 @@ protected:
 
   Ogre::Log* log_;
 
-  bool hide_menu_;
   QString display_config_;
 };
 
