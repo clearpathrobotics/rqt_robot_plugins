@@ -65,8 +65,6 @@ void RViz::initPlugin(qt_gui_cpp::PluginContext& context)
 {
   context_ = &context;
 
-  parseArguments();
-
   // prevent output of Ogre stuff to console
   Ogre::LogManager* log_manager = Ogre::LogManager::getSingletonPtr();
   if (!log_manager)
@@ -82,6 +80,8 @@ void RViz::initPlugin(qt_gui_cpp::PluginContext& context)
   QMenuBar* menu_bar = new QMenuBar();
   menu_bar->setNativeMenuBar(false);
   widget_->setMenuBar(menu_bar);
+
+  parseArguments();
 
   widget_->initialize(display_config_);
 
