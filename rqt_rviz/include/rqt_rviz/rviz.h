@@ -71,6 +71,12 @@ protected:
   Ogre::Log* log_;
 
   QString display_config_;
+
+  // unfortunately necessary because perspective settings are loaded *after*
+  // the parameters are processed - we want user-supplied parameters to
+  // superceded the default loaded perspective settings
+  bool display_config_set_by_param_;
+  bool hide_menu_set_by_param_;
 };
 
 }
