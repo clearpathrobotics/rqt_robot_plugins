@@ -57,6 +57,10 @@ public:
 
   virtual bool eventFilter(QObject* watched, QEvent* event);
 
+  virtual void saveSettings(qt_gui_cpp::Settings& plugin_settings, qt_gui_cpp::Settings& instance_settings) const;
+
+  virtual void restoreSettings(const qt_gui_cpp::Settings& plugin_settings, const qt_gui_cpp::Settings& instance_settings);
+
 protected:
   void parseArguments();
 
@@ -66,8 +70,13 @@ protected:
 
   Ogre::Log* log_;
 
-  bool hide_menu_;
-  std::string display_config_;
+  QString display_config_;
+
+  // unfortunately necessary because perspective settings are loaded *after*
+  // the parameters are processed - we want user-supplied parameters to
+  // superceded the default loaded perspective settings
+  bool display_config_set_by_param_;
+  bool hide_menu_set_by_param_;
 };
 
 }

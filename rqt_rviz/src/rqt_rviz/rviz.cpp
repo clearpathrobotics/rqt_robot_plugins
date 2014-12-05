@@ -48,7 +48,8 @@ RViz::RViz()
   , context_(0)
   , widget_(0)
   , log_(0)
-  , hide_menu_(false)
+  , display_config_set_by_param_(false)
+  , hide_menu_set_by_param_(false)
 {
   setObjectName("RViz");
 }
@@ -66,8 +67,6 @@ void RViz::initPlugin(qt_gui_cpp::PluginContext& context)
 {
   context_ = &context;
 
-  parseArguments();
-
   // prevent output of Ogre stuff to console
   Ogre::LogManager* log_manager = Ogre::LogManager::getSingletonPtr();
   if (!log_manager)
@@ -82,10 +81,11 @@ void RViz::initPlugin(qt_gui_cpp::PluginContext& context)
   // create own menu bar to disable native menu bars on Unity and Mac
   QMenuBar* menu_bar = new QMenuBar();
   menu_bar->setNativeMenuBar(false);
-  menu_bar->setVisible(!hide_menu_);
   widget_->setMenuBar(menu_bar);
 
-  widget_->initialize(display_config_.c_str());
+  parseArguments();
+
+  widget_->initialize(display_config_);
 
   // disable quit action in menu bar
   QMenu* menu = 0;
@@ -156,12 +156,14 @@ void RViz::parseArguments()
 
     if (vm.count("hide-menu"))
     {
-      hide_menu_ = true;
+      widget_->menuBar()->setVisible(false);
+      hide_menu_set_by_param_ = true;
     }
 
     if (vm.count("display-config"))
     {
-      display_config_ = vm["display-config"].as<std::string>();
+      display_config_ = QString::fromStdString(vm["display-config"].as<std::string>());
+      display_config_set_by_param_ = true;
     }
   }
   catch (std::exception& e)
@@ -180,6 +182,32 @@ bool RViz::eventFilter(QObject* watched, QEvent* event)
   }
 
   return QObject::eventFilter(watched, event);
+}
+
+void RViz::saveSettings(qt_gui_cpp::Settings& plugin_settings, qt_gui_cpp::Settings& instance_settings) const
+{
+  instance_settings.setValue("hide_menu", !widget_->menuBar()->isVisible());
+
+  if (!display_config_.isNull())
+  {
+    instance_settings.setValue("display_config", display_config_);
+  }
+}
+
+void RViz::restoreSettings(const qt_gui_cpp::Settings& plugin_settings, const qt_gui_cpp::Settings& instance_settings)
+{
+  QVariant hide_menu = instance_settings.value("hide_menu");
+  if (hide_menu.canConvert<bool>() && !hide_menu_set_by_param_)
+  {
+    widget_->menuBar()->setVisible(!hide_menu.toBool());
+  }
+
+  QVariant display_config = instance_settings.value("display_config");
+  if (display_config.canConvert<QString>() && !display_config_set_by_param_)
+  {
+    display_config_ = display_config.toString();
+    widget_->loadDisplayConfig(display_config_);
+  }
 }
 
 }
