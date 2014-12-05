@@ -20,6 +20,24 @@ Changelog for package rqt_nav_view
 ------------------
 * add groups for rqt plugins (`ros-visualization/rqt_common_plugins#167 <https://github.com/ros-visualization/rqt_common_plugins/issues/167>`_)
 
+Forthcoming
+-----------
+* update / remove outdated email addresses
+* 0.3.6
+* update changelogs
+* use queue_size for Python publishers only when available
+* 0.3.5
+* update changelogs
+* use queue_size for Python publishers
+* 0.3.4
+* update changelogs
+* 0.3.3
+* update changelogs
+* "0.3.2"
+* update changelogs
+* add groups for rqt plugins (`ros-visualization/rqt_common_plugins#167 <https://github.com/ros-visualization/rqt_common_plugins/issues/167>`_)
+* Contributors: Dirk Thomas
+
 0.3.1 (2013-10-09)
 ------------------
 

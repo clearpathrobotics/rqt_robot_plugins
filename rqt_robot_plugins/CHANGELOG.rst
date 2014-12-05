@@ -17,6 +17,21 @@ Changelog for package rqt_robot_plugins
 0.3.2 (2014-01-08)
 ------------------
 
+Forthcoming
+-----------
+* update / remove outdated email addresses
+* 0.3.6
+* update changelogs
+* 0.3.5
+* update changelogs
+* 0.3.4
+* update changelogs
+* 0.3.3
+* update changelogs
+* "0.3.2"
+* update changelogs
+* Contributors: Dirk Thomas
+
 0.3.1 (2013-10-09)
 ------------------
 
