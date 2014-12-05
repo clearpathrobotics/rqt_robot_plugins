@@ -20,8 +20,8 @@ Changelog for package rqt_rviz
 ------------------
 * add groups for rqt plugins (`ros-visualization/rqt_common_plugins#167 <https://github.com/ros-visualization/rqt_common_plugins/issues/167>`_)
 
-Forthcoming
------------
+0.4.1 (2014-12-05)
+------------------
 * Ensure that cmd line parameters supercede perspective
   If cmd line parameters are provided they overrule whatever is in the
   perspective file.
