@@ -17,8 +17,8 @@ Changelog for package rqt_robot_dashboard
 0.3.2 (2014-01-08)
 ------------------
 
-Forthcoming
------------
+0.4.0 (2014-12-05)
+------------------
 * update / remove outdated email addresses
 * 0.3.6
 * update changelogs
