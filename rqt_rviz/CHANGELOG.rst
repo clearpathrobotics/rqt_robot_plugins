@@ -20,6 +20,28 @@ Changelog for package rqt_rviz
 ------------------
 * add groups for rqt plugins (`ros-visualization/rqt_common_plugins#167 <https://github.com/ros-visualization/rqt_common_plugins/issues/167>`_)
 
+Forthcoming
+-----------
+* Ensure that cmd line parameters supercede perspective
+  If cmd line parameters are provided they overrule whatever is in the
+  perspective file.
+* Fixed segault in parseArguments
+  parseArguments was called before menu_bar existed.
+* Load/save RViz plugin settings to perspective.
+  Allows RViz plugin to be used without a menu and with a custom .rviz
+  file when used together with other rqt plugins.
+  A few caveats to this functionality:
+  - The perspective use-case is considered orthogonal to the command-line
+  use case, so settings in the perspective file will override what is
+  passed in on the command line - even though this is backwards. In the
+  case of a multi-plugins rqt perspective, this doesn't matter since
+  command line parameters won't be passed to rqt_rviz.
+  - It's expected that the perspective file will be edited by hand to
+  achieve the correct configuration of the RViz plugin. Otherwise
+  there's no good way to store these two settings in the perspective
+  file without causing confusion for the user.
+* Contributors: Alex Bencz
+
 0.4.0 (2014-12-05)
 ------------------
 * Temporarily store QByteArrays when parsing args

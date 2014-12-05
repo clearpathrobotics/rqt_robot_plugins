@@ -17,6 +17,9 @@ Changelog for package rqt_robot_plugins
 0.3.2 (2014-01-08)
 ------------------
 
+Forthcoming
+-----------
+
 0.4.0 (2014-12-05)
 ------------------
 * update / remove outdated email addresses

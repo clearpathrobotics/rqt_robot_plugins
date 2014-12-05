@@ -18,6 +18,9 @@ Changelog for package rqt_pose_view
 ------------------
 * add groups for rqt plugins (`ros-visualization/rqt_common_plugins#167 <https://github.com/ros-visualization/rqt_common_plugins/issues/167>`_)
 
+Forthcoming
+-----------
+
 0.4.0 (2014-12-05)
 ------------------
 * 0.3.6
