@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>RobotMonitorWidget</class>
  <widget class="RobotMonitorWidget" name="RobotMonitorWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>256</width>
+    <height>576</height>
+   </rect>
+  </property>
   <property name="minimumSize">
    <size>
     <width>200</width>
@@ -26,54 +34,6 @@
      <property name="handleWidth">
       <number>9</number>
      </property>
-     <widget class="QTreeWidget" name="err_flattree">
-      <property name="minimumSize">
-       <size>
-        <width>75</width>
-        <height>25</height>
-       </size>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-      <property name="sortingEnabled">
-       <bool>false</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string notr="true">Error Device</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Message</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QTreeWidget" name="warn_flattree">
-      <property name="minimumSize">
-       <size>
-        <width>75</width>
-        <height>25</height>
-       </size>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-      <property name="sortingEnabled">
-       <bool>false</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string notr="true">Warned Device</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Message</string>
-       </property>
-      </column>
-     </widget>
      <widget class="QTreeWidget" name="tree_all_devices">
       <property name="minimumSize">
        <size>
@@ -114,16 +74,12 @@
    </item>
   </layout>
  </widget>
-<customwidgets>
+ <customwidgets>
   <customwidget>
    <class>RobotMonitorWidget</class>
    <extends>QWidget</extends>
    <header>rqt_robot_monitor.robot_monitor</header>
-  </customwidget>
-  <customwidget>
-   <class>TimelinePane</class>
-   <extends>QWidget</extends>
-   <header>rqt_robot_monitor.timeline_pane</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

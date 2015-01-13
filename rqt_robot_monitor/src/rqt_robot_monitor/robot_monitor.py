@@ -104,8 +104,6 @@ class RobotMonitorWidget(QWidget):
         self._current_msg = None
 
         self.tree_all_devices.itemDoubleClicked.connect(self._tree_clicked)
-        self.warn_flattree.itemDoubleClicked.connect(self._tree_clicked)
-        self.err_flattree.itemDoubleClicked.connect(self._tree_clicked)
         # TODO: resize on itemCollapsed and itemExpanded
 
         self._is_stale = False
@@ -119,8 +117,6 @@ class RobotMonitorWidget(QWidget):
         self._original_alt_base_color = palette.alternateBase().color()
 
         self._tree = StatusItem(self.tree_all_devices.invisibleRootItem())
-        self._warn_tree = StatusItem(self.warn_flattree.invisibleRootItem())
-        self._err_tree = StatusItem(self.err_flattree.invisibleRootItem())
 
     @Slot(DiagnosticArray)
     def message_cb(self, msg):
@@ -133,25 +129,15 @@ class RobotMonitorWidget(QWidget):
             path = status.name.split('/')
             if path[0] == '':
                 path = path[1:]
+            else:
+                continue
             tmp_tree = self._tree
             for p in path:
                 tmp_tree = tmp_tree[p]
             tmp_tree.update(status, util.get_resource_name(status.name))
 
-            # Check for warnings
-            if status.level == DiagnosticStatus.WARN:
-                name = status.name
-                self._warn_tree[name].update(status, status.name)
-
-            # Check for errors
-            if status.level == DiagnosticStatus.ERROR:
-                name = status.name
-                self._err_tree[name].update(status, status.name)
-
         # For any items in the tree that were not updated, remove them
         self._tree.prune()
-        self._warn_tree.prune()
-        self._err_tree.prune()
 
         # TODO(ahendrix): implement
         # Insight: for any item that is not OK, it only provides additional
@@ -162,8 +148,6 @@ class RobotMonitorWidget(QWidget):
         #          the warning and error flat trees
 
         self.tree_all_devices.resizeColumnToContents(0)
-        self.warn_flattree.resizeColumnToContents(0)
-        self.err_flattree.resizeColumnToContents(0)
 
     def resizeEvent(self, evt):
         """Overridden from QWidget"""
@@ -224,8 +208,6 @@ class RobotMonitorWidget(QWidget):
             p.setColor(QPalette.Base, self._original_base_color)
             p.setColor(QPalette.AlternateBase, self._original_alt_base_color)
         self.tree_all_devices.setPalette(p)
-        self.warn_flattree.setPalette(p)
-        self.err_flattree.setPalette(p)
 
     def shutdown(self):
         """
