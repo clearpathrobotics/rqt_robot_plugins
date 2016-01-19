@@ -155,5 +155,5 @@ class Timeline(QObject):
         return len(self._queue)
 
     def __iter__(self):
-        for msg in self._queue:
+        for msg in list(self._queue):
             yield msg
